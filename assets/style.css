@@ -13,7 +13,7 @@ body {
     position: relative;
     isolation: isolate;
 
-    padding: clamp(12px, 4vw, 40px);
+    padding: clamp(12px, 1.3vw, 40px);
 
     font-family: monospace;
     font-size: 16px;
