@@ -6,7 +6,7 @@
 }:
 ''
   <p class="nav">${
-    lib.concatMapStringsSep " " (name: slib.anchor "/${name}.html" "[${name}]") (
+    lib.concatMapStringsSep " " (name: slib.anchor "/${lib.optionalString (name != "index") name}" "[${name}]") (
       builtins.attrNames pages
     )
   }</p>
