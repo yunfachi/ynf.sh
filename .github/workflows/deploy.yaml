@@ -32,9 +32,9 @@ jobs:
       - name: Install Nix
         uses: nixbuild/nix-quick-install-action@v35
         with:
-        nix_conf: |
-          keep-env-derivations = true
-          keep-outputs = true
+          nix_conf: |
+            keep-env-derivations = true
+            keep-outputs = true
       
       - name: Restore and save Nix store
         uses: nix-community/cache-nix-action@v7
