@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+
+    padding: clamp(12px, 4vw, 40px);
+
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.5;
+
+    color: #000;
+}
+
+p {
+    margin: 0 0 16px 0;
+}
+
+.text {
+    position: relative;
+    z-index: 1;
+
+    max-width: 50em;
+}
+
+a,
+a:visited {
+    color: inherit;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    position: fixed;
+
+    right: 10px;
+    bottom: 0;
+
+    width: min(100vw, 100vh);
+    height: auto;
+
+    max-width: 700px;
+
+    display: block;
+
+    z-index: -1;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.nav {
+    white-space: nowrap;
+}
+
+pre {
+    white-space: break-spaces;
+    overflow-x: auto;
+}
+
+@media (max-width: 400px) {
+    .nowrap,
+    .nav {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+}
