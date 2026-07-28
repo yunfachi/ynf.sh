@@ -11,7 +11,7 @@
   <br>
   Revision ${
     if flake ? shortRev then
-      slib.anchor "https://github.com/yunfachi/ynf.sh/tree/${flake.rev or flake.shortRev}" flake.shortRev
+      slib.anchorNewTab "https://github.com/yunfachi/ynf.sh/tree/${flake.rev or flake.shortRev}" flake.shortRev
     else
       "dirty"
   }${
