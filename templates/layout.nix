@@ -3,19 +3,14 @@
   ...
 }:
 content: ''
-  <div class="text">
+  <div class="text">${templates.frame ''
+    ${templates.nav}
 
-  <p>-----BEGIN YUNFACHI WEBSITE-----</p>
-
-  ${templates.nav}
-
-  ${content}
-
-  <p>-----END YUNFACHI WEBSITE-----</p>
+    ${content}
+  ''}
 
   ${templates.footer}
-
   </div>
 
-  <img src="/assets/banner.gif">
+  <img src="/assets/banner.gif" alt="">
 ''
