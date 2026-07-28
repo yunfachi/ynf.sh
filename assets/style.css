@@ -13,7 +13,12 @@ body {
     position: relative;
     isolation: isolate;
 
-    padding: clamp(12px, 1.3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    --body-padding: clamp(12px, 1.3vw, 40px);
+    padding: var(--body-padding);
 
     font-family: monospace;
     font-size: 16px;
@@ -66,6 +71,21 @@ a:hover {
 
     -webkit-mask: url("/assets/banner.png") center / contain no-repeat;
     mask: url("/assets/banner.png") center / contain no-repeat;
+}
+
+@media (max-width: 1000px) {
+    .logo {
+        position: static;
+
+        right: auto;
+        bottom: auto;
+
+        margin: auto calc(-1 * var(--body-padding) + 10px) calc(-1 * var(--body-padding)) auto;
+
+        width: 85vw;
+
+        z-index: auto;
+    }
 }
 
 .nowrap {
