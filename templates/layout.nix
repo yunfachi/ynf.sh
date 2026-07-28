@@ -12,5 +12,5 @@ content: ''
   ${templates.footer}
   </div>
 
-  <img src="/assets/banner.gif" alt="">
+  <div class="logo"></div>
 ''

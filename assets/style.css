@@ -43,14 +43,14 @@ a:hover {
     text-decoration: none;
 }
 
-img {
+.logo {
     position: fixed;
 
     right: 10px;
     bottom: 0;
 
     width: min(100vw, 100vh);
-    height: auto;
+    aspect-ratio: 700/500;
 
     max-width: 700px;
 
@@ -61,6 +61,11 @@ img {
     pointer-events: none;
     user-select: none;
     -webkit-touch-callout: none;
+
+    background: #000;
+
+    -webkit-mask: url("/assets/banner.png") center / contain no-repeat;
+    mask: url("/assets/banner.png") center / contain no-repeat;
 }
 
 .nowrap {
