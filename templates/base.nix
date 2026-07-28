@@ -8,8 +8,6 @@ content: ''
   <head>
   ${templates.head}
   </head>
-  <body>
-  ${templates.layout content}
-  </body>
+  <body>${templates.layout content}</body>
   </html>
 ''
