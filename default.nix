@@ -1,6 +1,25 @@
-{ lib, ... }@args:
+{
+  lib ? pkgs.lib,
+  pkgs ? import <nixpkgs> { },
+  system ? builtins.currentSystem,
+  flake ? { },
+  ...
+}@args:
 let
-  slib = import ./lib.nix (args // { inherit templates pages slib; });
+  slib = import ./lib.nix (
+    args
+    // {
+      inherit
+        templates
+        pages
+        slib
+        lib
+        pkgs
+        system
+        flake
+        ;
+    }
+  );
 
   templates = lib.mapAttrs (
     _name: value:
