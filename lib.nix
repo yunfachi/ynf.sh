@@ -17,6 +17,15 @@
   addSuffixToAttrNames =
     suffix: attrs: lib.mapAttrs' (name: lib.nameValuePair "${name}${suffix}") attrs;
 
+  getRemoteAttrPos =
+    attrs: name:
+    let
+      pos = builtins.unsafeGetAttrPos name attrs;
+    in
+    "https://github.com/yunfachi/ynf.sh/blob/master${
+      lib.removePrefix (flake.outPath or ./.) pos.file
+    }#L${toString pos.line}";
+
   flattenAttrs =
     let
       func =
