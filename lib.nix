@@ -5,7 +5,7 @@
   ...
 }@args:
 {
-  call = file: import file args;
+  call = file: lib.toFunction (import file) args;
 
   callDir =
     dir:
