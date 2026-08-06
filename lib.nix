@@ -2,6 +2,7 @@
   pkgs,
   lib,
   slib,
+  flake,
   ...
 }@args:
 {
@@ -16,6 +17,22 @@
 
   addSuffixToAttrNames =
     suffix: attrs: lib.mapAttrs' (name: lib.nameValuePair "${name}${suffix}") attrs;
+
+  addSuffixToAttrNamesRecursive =
+    suffix:
+    let
+      func = lib.mapAttrs' (
+        name: value:
+        if builtins.isAttrs value then
+          {
+            inherit name;
+            value = func value;
+          }
+        else
+          lib.nameValuePair "${name}${suffix}" value
+      );
+    in
+    func;
 
   getRemoteAttrPos =
     attrs: name:
