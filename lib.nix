@@ -53,7 +53,7 @@
             path = lib.optionalString (prefix != "") "${prefix}${sep}" + name;
           in
           if builtins.isAttrs value then
-            func path value
+            func path sep value
           else
             {
               "${path}" = value;
