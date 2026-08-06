@@ -33,6 +33,6 @@ let
   structure = {
     "assets" = ./assets;
   }
-  // slib.addSuffixToAttrNames ".html" pages;
+  // slib.addSuffixToAttrNamesRecursive ".html" pages;
 in
 slib.toDir structure
