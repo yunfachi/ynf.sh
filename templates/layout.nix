@@ -3,7 +3,7 @@
   ...
 }:
 content: ''
-  <div class="text">${templates.frame ''
+  <div class="text">${templates.frame "YUNFACHI WEBSITE" ''
     ${templates.nav}
 
     ${content}

@@ -1,7 +1,7 @@
-_: content: ''
-  <p>-----BEGIN YUNFACHI WEBSITE-----</p>
+_: name: content: ''
+  <p>-----BEGIN ${name}-----</p>
 
   ${content}
 
-  <p>-----END YUNFACHI WEBSITE-----</p>
+  <p>-----END ${name}-----</p>
 ''
