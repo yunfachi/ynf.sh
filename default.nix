@@ -10,6 +10,7 @@ let
     args
     // {
       inherit
+        data
         templates
         pages
         slib
@@ -20,6 +21,8 @@ let
         ;
     }
   );
+
+  data = slib.callDir ./data;
 
   templates = lib.mapAttrs (
     _name: value:
