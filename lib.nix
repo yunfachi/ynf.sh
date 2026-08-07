@@ -69,7 +69,14 @@
     in
     pkgs.linkFarm "site" (
       builtins.mapAttrs (
-        name: value: if builtins.isPath value then value else builtins.toFile name value
+        name: value:
+        if builtins.isPath value then
+          value
+        else
+          pkgs.writeTextFile {
+            inherit name;
+            text = value;
+          }
       ) flat
     );
 
