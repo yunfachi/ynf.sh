@@ -25,12 +25,18 @@ let
   data = slib.callDir ./data;
 
   templates = lib.mapAttrs (
-    _name: value:
-    if !builtins.isFunction value then
-      lib.removeSuffix "\n" value
-    else
-      content: lib.removeSuffix "\n" (value (lib.removeSuffix "\n" content))
+    _name:
+    let
+      func =
+        value:
+        if !builtins.isFunction value then
+          lib.removeSuffix "\n" value
+        else
+          content: func (value (lib.removeSuffix "\n" content));
+    in
+    func
   ) (slib.callDir ./templates);
+
   pages = slib.callDir ./pages;
 
   structure = {
