@@ -22,9 +22,10 @@ body {
 
     font-family: monospace;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.25rem;
 
     color: #000;
+    background-color: #f2f0eb;
 }
 
 p {
