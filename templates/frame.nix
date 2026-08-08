@@ -1,7 +1,9 @@
 _: name: content: ''
+  <div class="frame">
   <p>-----BEGIN ${name}-----</p>
 
-  ${content}
+  <div class="frame-content">${content}</div>
 
   <p>-----END ${name}-----</p>
+  </div>
 ''
