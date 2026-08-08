@@ -5,7 +5,7 @@
   data,
   ...
 }:
-templates.base ''
+templates.base "yunfachi projects" ''
   <p>My projects:</p>
 
   <pre>
