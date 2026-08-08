@@ -3,11 +3,9 @@
   ...
 }:
 content: ''
-  <div class="text">${templates.frame "YUNFACHI WEBSITE" ''
-    ${templates.nav}
+  <div class="text">${templates.nav}
 
-    ${content}
-  ''}
+  ${templates.frame "YUNFACHI WEBSITE" content}
 
   ${templates.footer}
   </div>
