@@ -69,6 +69,7 @@
     Then, you need to define your first secret - for example, a user's password hash (yep, it is more secure to not publish your password hashes):
 
     ${slib.highlightCode "nix" ''
+      # configuration.nix
       { config, ... }: {
         security.nix-secrets.secrets."user/passwordHash" = {
           neededForUsers = true; # This is required because the secret is used to create users. Otherwise, you generally don't need it.
