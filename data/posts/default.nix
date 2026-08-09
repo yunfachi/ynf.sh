@@ -6,4 +6,4 @@ lib.mapAttrs (
     title = lib.replaceStrings [ " - " ] [ " — " ] post.title;
     content = lib.replaceStrings [ " - " ] [ " — " ] post.content;
   }
-) slib.callDir ./src
+) (slib.callDir ./src)
