@@ -43,6 +43,9 @@ let
 
   structure = {
     "assets" = ./assets;
+    "sitemap.txt" = lib.concatMapStringsSep "\n" (
+      path: lib.removeSuffix "index" "https://ynf.sh/${path}"
+    ) (builtins.attrNames pages);
   }
   // slib.addSuffixToAttrNamesRecursive ".html" pages;
 in
