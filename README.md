@@ -11,7 +11,6 @@ Just open it: https://ynf.sh/
   <a href="https://ynf.sh/posts/nix-secrets-a-postmodern-secrets-manager-for-nixos"><img src=".github/assets/screenshots/post.png" width="49%"></a>
 </p>
 
-
 ## Build
 
 ```sh
