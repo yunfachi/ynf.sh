@@ -46,6 +46,12 @@ let
     "sitemap.txt" = lib.concatMapStringsSep "\n" (
       path: lib.removeSuffix "index" "https://ynf.sh/${path}"
     ) (builtins.attrNames pages);
+    "robots.txt" = ''
+      User-agent: *
+      Allow: /
+
+      Sitemap: https://ynf.sh/sitemap.txt
+    '';
   }
   // slib.addSuffixToAttrNamesRecursive ".html" pages;
 in
