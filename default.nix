@@ -37,7 +37,9 @@ let
     func
   ) (slib.callDir ./templates);
 
-  pages = slib.callDir ./pages;
+  pages = lib.mapAttrs' (name: value: lib.nameValuePair (lib.removeSuffix "/index" name) value) (
+    slib.flattenAttrs "/" (slib.callDir ./pages)
+  );
 
   structure = {
     "assets" = ./assets;
