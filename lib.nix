@@ -87,4 +87,22 @@
   anchorNewTab = url: content: ''<a href="${slib.escapeHtml url}" target="_blank">${content}</a>'';
 
   styledAnchor = url: slib.anchorNewTab url (lib.removePrefix "https" url);
+
+  highlightCode =
+    lang: content:
+    lib.removeSuffix "\n" (
+      builtins.readFile (
+        pkgs.runCommand "highlight-${lang}" { } ''
+          ${lib.getExe pkgs.chroma} \
+            --lexer ${lib.escapeShellArg lang} \
+            --style=solarized-dark \
+            --html \
+            --html-only \
+            --html-inline-styles \
+            --html-prevent-surrounding-pre \
+            < ${builtins.toFile "input.${lang}" content} \
+            > $out
+        ''
+      )
+    );
 }
