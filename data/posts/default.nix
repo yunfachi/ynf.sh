@@ -1,0 +1,1 @@
+{ slib, ... }: slib.callDir ./src

@@ -11,6 +11,7 @@
       [
         "index"
         "projects"
+        "posts"
       ]
   }</p>
 ''
