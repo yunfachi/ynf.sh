@@ -1,0 +1,121 @@
+name: Update screenshots
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Create screenshots
+        run: |
+          mkdir -p .github/assets/screenshots
+
+          node <<'EOF'
+          const { chromium } = require('playwright');
+
+          const screenshots = [
+            {
+              url: 'https://ynf.sh/',
+              file: '.github/assets/screenshots/index.png',
+            },
+            {
+              url: 'https://ynf.sh/projects',
+              file: '.github/assets/screenshots/projects.png',
+            },
+            {
+              url: 'https://ynf.sh/posts',
+              file: '.github/assets/screenshots/posts.png',
+            },
+            {
+              url: 'https://ynf.sh/posts/nix-secrets-a-postmodern-secrets-manager-for-nixos',
+              file: '.github/assets/screenshots/post.png',
+            },
+          ];
+
+          (async () => {
+            const browser = await chromium.launch();
+
+            const page = await browser.newPage({
+              viewport: {
+                width: 1440,
+                height: 900,
+              },
+              deviceScaleFactor: 1,
+            });
+
+            for (const screenshot of screenshots) {
+              console.log(`Screenshotting ${screenshot.url}`);
+
+              await page.goto(screenshot.url, {
+                waitUntil: 'networkidle',
+              });
+
+              await page.screenshot({
+                path: screenshot.file,
+                fullPage: false,
+              });
+            }
+
+            await browser.close();
+          })();
+          EOF
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: .github/assets/screenshots/
+
+
+  commit:
+    needs: screenshots
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: screenshots
+          path: .github/assets/screenshots
+
+      - name: Commit screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .github/assets/screenshots/index.png
+          git add .github/assets/screenshots/projects.png
+          git add .github/assets/screenshots/posts.png
+          git add .github/assets/screenshots/post.png
+
+          git diff --cached --quiet && exit 0
+
+          git commit -m ".github/assets/screenshots: update"
+          git push
