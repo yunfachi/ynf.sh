@@ -16,7 +16,7 @@
 }
 // lib.mapAttrs (_id: post: {
   index = templates.base post.title ''
-    <p>${post.title} - ${post.date}<br>${slib.anchor "/posts" "[back to posts]"} ${slib.anchor (slib.getRemoteAttrPos post "content") "[edit]"}</p>
+    <p>${post.title} - ${post.date}<br>${slib.anchor "/posts" "[back to posts]"} ${slib.anchor post.editURL "[edit]"}</p>
     ${templates.frame "POST CONTENT" "<pre>${post.content}</pre>"}
   '';
 }) data.posts
