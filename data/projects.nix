@@ -40,6 +40,6 @@
     name = "wallpaper-manager";
     languages = [ "Rust" ];
     description = "Daemon for unified interaction with wallpaper daemons";
-    source = "https://github.com/unnamed-systems/wallpaper-manager";
+    source = "https://github.com/yunfachi/wallpaper-manager";
   }
 ]
