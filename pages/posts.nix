@@ -9,9 +9,9 @@
   index = templates.base "yunfachi blog posts" ''
     <p>This is my blog, mostly about weird things built with Nix and security vulnerabilities that I can publicly disclose.</p>
 
-    ${lib.concatMapAttrsStringSep "" (id: post: ''
-      <p>${slib.anchor "/posts/${id}" "[${post.date}] ${post.title}"}</p>
-    '') data.posts}
+    ${lib.concatMapStringsSep "" (post: ''
+      <p>${slib.anchor "/posts/${post.name}" "[${post.value.date}] ${post.value.title}"}</p>
+    '') (builtins.sort (a: b: a.value.date > b.value.date) (lib.attrsToList data.posts))}
   '';
 }
 // lib.mapAttrs (_id: post: {
