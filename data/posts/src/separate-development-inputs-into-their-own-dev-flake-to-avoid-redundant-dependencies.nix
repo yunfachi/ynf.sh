@@ -23,10 +23,13 @@
       # dev/flake.nix
       {
         inputs = {
-          # By this "hack", you can access your root flake and its inputs
-          # to deduplicate them in the `dev` flake too.
+          # By this "hack", you can access your root flake and its inputs to
+          # deduplicate them in the `dev` flake too. It only works in a git repository.
           # my-project.url = "path:../.";
           # nixpkgs.follows = "my-project/nixpkgs";
+
+          # Nixpkgs is required for flake-parts `perSystem` to work.
+          nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
           # Remove this if you already have flake-parts in your root flake.
           flake-parts.url = "github:hercules-ci/flake-parts";
@@ -77,24 +80,26 @@
       {
         inputs = {
           # You may remove this; read the comments below.
-          flake-compat = "github:NixOS/flake-compat";
+          flake-compat.url = "github:NixOS/flake-compat";
 
           # ...
         };
 
-        outputs = let
+        outputs = { flake-compat, ... }: let
           # If you have `flake-compat` in your inputs, keep this:
-          devInputs = (import inputs.flake-compat { src = ./dev; }).defaultNix.inputs;
+          devFlake = (import flake-compat { src = ./dev; }).defaultNix;
 
           # But if you don't want `flake-compat` itself to become a dependency of your users, you can fetch the pinned flake-compat implementation directly:
-          # devInputs =
+          # devFlake =
           #   (import (builtins.fetchurl {
           #     url = "https://raw.githubusercontent.com/NixOS/flake-compat/f275e157c50c3a9a682b4c9b4aa4db7a4cd3b5f2/default.nix";
           #     sha256 = "sha256:0nycwx0777d451k63ghp6p5lcv791kziqgkvqzmr1qwzywkdk1cj";
-          #   }) { src = ./dev; }).defaultNix.inputs;
+          #   }) { src = ./dev; }).defaultNix;
 
           devOutputs = devInputs.flake-parts.lib.mkFlake {
-            inputs = devInputs;
+            inputs = devFlake.inputs // {
+              self = devFlake;
+            };
           } ./dev/config.nix;
         in {
           # Explicitly inherit outputs to prevent forcing evaluation of the `dev` flake
@@ -102,7 +107,7 @@
           inherit (devOutputs) checks formatter;
         } // {
           # Some output that is free from fetching `dev` inputs.
-          nixosModules.default = ...;
+          # nixosModules.default = ...;
         };
       }
     ''}
@@ -122,8 +127,8 @@
       # dev/flake.nix
       {
         inputs = {
-          # By this "hack", you can access your root flake and its inputs
-          # to deduplicate them in the `dev` flake too.
+          # By this "hack", you can access your root flake and its inputs to
+          # deduplicate them in the `dev` flake too. It only works in a git repository.
           # my-project.url = "path:../.";
           # nixpkgs.follows = "my-project/nixpkgs";
 
@@ -148,14 +153,14 @@
       {
         inputs = {
           # You may remove this; read the comments below.
-          flake-compat = "github:NixOS/flake-compat";
+          flake-compat.url = "github:NixOS/flake-compat";
 
           # ...
         };
 
-        outputs = let
+        outputs = { flake-compat, ... }: let
           # If you have `flake-compat` in your inputs, keep this:
-          devInputs = (import inputs.flake-compat { src = ./dev; }).defaultNix.inputs;
+          devInputs = (import flake-compat { src = ./dev; }).defaultNix.inputs;
 
           # But if you don't want `flake-compat` itself to become a dependency of your users, you can fetch the pinned flake-compat implementation directly:
           # devInputs =
@@ -165,7 +170,7 @@
           #   }) { src = ./dev; }).defaultNix.inputs;
         in {
           # Some output that is free from fetching `dev` inputs.
-          nixosModules.default = ...;
+          # nixosModules.default = ...;
 
           # Actually, read the `treefmt-nix` manual for the proper setup of it; this post is not about how to use `treefmt-nix`.
           formatter = devInputs.treefmt-nix.formatter;
