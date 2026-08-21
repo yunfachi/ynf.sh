@@ -31,7 +31,8 @@
           # Nixpkgs is required for flake-parts `perSystem` to work.
           nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-          # Remove this if you already have flake-parts in your root flake.
+          # Remove this if flake-parts is already used in your root flake
+          # or if you want to implement the mechanism yourself.
           flake-parts.url = "github:hercules-ci/flake-parts";
 
           # Add any inputs that you want here; `treefmt-nix` is used as an example.
@@ -45,6 +46,9 @@
         outputs = _: { };
       }
     ''}
+
+    > Can I do this without flake-parts?
+    > Yes, but you'll need to implement your own mechanism for separating the `dev` flake's logic into another file. This can be a bit tricky. You may want to consider the second option below instead.
 
     Then we'll create a ${slib.anchorNewTab "https://github.com/hercules-ci/flake-parts" "flake-parts"} module in it. Don't worry, flake-parts is not required in your root flake:
 
