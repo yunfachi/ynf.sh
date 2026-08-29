@@ -23,8 +23,8 @@
       # dev/flake.nix
       {
         inputs = {
-          # By this "hack", you can access your root flake and its inputs to
-          # deduplicate them in the `dev` flake too. It only works in a git repository.
+          # By this "hack", you can access your root flake's inputs to deduplicate them
+          # in the `dev` flake too. It only works in a git repository.
           # my-project.url = "path:../.";
           # nixpkgs.follows = "my-project/nixpkgs";
 
@@ -92,7 +92,7 @@
           # ...
         };
 
-        outputs = { flake-compat, ... }: let
+        outputs = { flake-compat, self, ... }: let
           # If you have `flake-compat` in your inputs, keep this:
           devFlake = (import flake-compat { src = ./dev; }).defaultNix;
 
@@ -105,6 +105,7 @@
 
           devOutputs = devFlake.inputs.flake-parts.lib.mkFlake {
             inputs = devFlake.inputs // {
+              my-project = self;
               self = devFlake;
             };
           } ./dev/config.nix;
@@ -112,7 +113,7 @@
           # Explicitly inherit outputs to prevent forcing evaluation of the `dev` flake
           # when accessing root flake outputs.
           inherit (devOutputs) checks formatter;
-        } // {
+
           # Some output that is free from fetching `dev` inputs.
           # nixosModules.default = ...;
         };
