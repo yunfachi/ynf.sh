@@ -33,7 +33,10 @@
 
           # Remove this if flake-parts is already used in your root flake
           # or if you want to implement the mechanism yourself.
-          flake-parts.url = "github:hercules-ci/flake-parts";
+          flake-parts = {
+            url = "github:hercules-ci/flake-parts";
+            # inputs.nixpkgs-lib.follows = "nixpkgs";
+          };
 
           # Add any inputs that you want here; `treefmt-nix` is used as an example.
           treefmt-nix = {
@@ -100,7 +103,7 @@
           #     sha256 = "sha256:0nycwx0777d451k63ghp6p5lcv791kziqgkvqzmr1qwzywkdk1cj";
           #   }) { src = ./dev; }).defaultNix;
 
-          devOutputs = devInputs.flake-parts.lib.mkFlake {
+          devOutputs = devFlake.inputs.flake-parts.lib.mkFlake {
             inputs = devFlake.inputs // {
               self = devFlake;
             };
