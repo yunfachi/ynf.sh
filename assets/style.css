@@ -99,7 +99,7 @@ a:hover {
 
 pre {
     white-space: break-spaces;
-    overflow-x: auto;
+    overflow: auto hidden;
 }
 
 @media (max-width: 400px) {
