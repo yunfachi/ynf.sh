@@ -73,7 +73,7 @@ a:hover {
     mask: url("/assets/banner.png") center / contain no-repeat;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .logo {
         position: static;
 
