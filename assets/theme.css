@@ -13,7 +13,7 @@ body {
     background: var(--fg);
 }
 
-.line_number {
+.line-number {
     color: light-dark(#93a1a1, #586e75);
 }
 

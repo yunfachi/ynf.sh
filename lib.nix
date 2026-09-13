@@ -104,12 +104,12 @@
             + content;
         in
         lib.concatImapStringsSep "\n" (
-          line_number: line:
-          ''<span class="line_number">${
+          lineNumber: line:
+          ''<span class="line-number">${
             if lang == "sh" then
-              padLeft " " (if line_number == 1 then "$" else "")
+              padLeft " " (if lineNumber == 1 then "$" else "")
             else
-              padLeft "0" (toString line_number)
+              padLeft "0" (toString lineNumber)
           }</span>${line}''
         ) (lib.splitString "\n" text);
     in

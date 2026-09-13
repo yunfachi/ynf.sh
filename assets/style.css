@@ -94,7 +94,7 @@ a:hover {
     white-space: nowrap;
 }
 
-.line_number {
+.line-number {
     user-select: none;
     position: absolute;
     margin-left: -3ch;
