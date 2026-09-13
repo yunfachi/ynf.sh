@@ -55,9 +55,8 @@ a:hover {
     right: 10px;
     bottom: 0;
 
-    width: min(100vw, 100vh);
     aspect-ratio: 700/500;
-
+    width: min(100vw, 100vh * 7 / 5);
     max-width: 700px;
 
     display: block;
