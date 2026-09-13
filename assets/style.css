@@ -100,6 +100,11 @@ a:hover {
     margin-left: -3ch;
 }
 
+.link-gutter {
+    position: absolute;
+    margin-left: -2ch;
+}
+
 pre {
     white-space: break-spaces;
     overflow: auto hidden;

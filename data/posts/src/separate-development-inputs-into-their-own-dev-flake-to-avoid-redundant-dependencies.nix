@@ -7,8 +7,8 @@
 
     For example, you have a project called `niri-nix`, which introduces Niri's NixOS module and Niri package. But besides nixpkgs, that flake's inputs also include `flake-parts`, `treefmt-nix`, `git-hooks.nix`, and so on. Nix flake inputs are NOT lazily fetched. This means that if you only use, for example, `nixosModules.default` from that flake, and `nixosModules.default` does not mention `treefmt-nix` or any of the other inputs at all, they will still be added to the user's flake lock as dependencies of your flake, and they will still be downloaded.
 
-    > But how can you prevent some inputs from being redundantly and meaninglessly fetched?
-    > Implement a separate flake for those inputs - I call it a `dev` flake. The idea is to keep development-only inputs outside of the flake that is consumed by users.
+    ${slib.question "but-how"}But how can you prevent some inputs from being redundantly and meaninglessly fetched?
+    ${slib.answer "but-how"}Implement a separate flake for those inputs - I call it a `dev` flake. The idea is to keep development-only inputs outside of the flake that is consumed by users.
 
     There are 2 ways to set up a `dev` flake:
 
@@ -54,8 +54,8 @@
 
     ${slib.highlightCode "sh" "nix flake lock"}
 
-    > Can I do this without flake-parts?
-    > Yes, but you'll need to implement your own mechanism for separating the `dev` flake's logic into another file. This can be a bit tricky. You may want to consider the second option below instead.
+    ${slib.question "flake-parts"}Can I do this without flake-parts?
+    ${slib.answer "flake-parts"}Yes, but you'll need to implement your own mechanism for separating the `dev` flake's logic into another file. This can be a bit tricky. You may want to consider the second option below instead.
 
     Now we'll create a ${slib.anchorNewTab "https://github.com/hercules-ci/flake-parts" "flake-parts"} module in it. Don't worry, flake-parts is not required in your root flake:
 

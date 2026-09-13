@@ -5,7 +5,7 @@
   flake,
   ...
 }@args:
-{
+rec {
   call = file: lib.toFunction (import file) args;
 
   callDir =
@@ -87,6 +87,12 @@
   anchorNewTab = url: content: ''<a href="${slib.escapeHtml url}" target="_blank">${content}</a>'';
 
   styledAnchor = url: slib.anchorNewTab url (lib.removePrefix "https" url);
+
+  link = id: content: ''<span class="link-gutter"><a href="#${id}" id="${id}">${content}</a> </span>'';
+
+  question = id: link "q-${id}" "?";
+  answer = id: link "a-${id}" ">";
+  heading = id: link id "#";
 
   highlightCode =
     lang: content:

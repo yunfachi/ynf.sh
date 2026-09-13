@@ -7,8 +7,8 @@
 
     First of all, nix-secrets is a NixOS module with its own CLI written in Rust (the first advantage - no blazingly fast Bash!) that lets you safely use secrets in your configuration without leaking them.
 
-    > How does it work?
-    > You define the configuration for your secrets ONLY in your NixOS configuration (the second advantage - no need for a ".sops.yaml" file or standalone Nix expressions outside your configuration, as with agenix). Then, you open an editor for the secret using our CLI. It encrypts the secret using ${slib.anchorNewTab "https://age-encryption.org/" "age"} and stores it in the directory you specify - we call this the "storage". Finally, nix-secrets decrypts and mounts the secret at the path specified in the configuration. It supports both activation scripts and systemd services when `userborn` or `systemd.sysusers` is used (the third advantage - vaultix doesn't support activation scripts, so you can't use it without `userborn` or `systemd.sysusers`).
+    ${slib.question "how-works"}How does it work?
+    ${slib.answer "how-works"}You define the configuration for your secrets ONLY in your NixOS configuration (the second advantage - no need for a ".sops.yaml" file or standalone Nix expressions outside your configuration, as with agenix). Then, you open an editor for the secret using our CLI. It encrypts the secret using ${slib.anchorNewTab "https://age-encryption.org/" "age"} and stores it in the directory you specify - we call this the "storage". Finally, nix-secrets decrypts and mounts the secret at the path specified in the configuration. It supports both activation scripts and systemd services when `userborn` or `systemd.sysusers` is used (the third advantage - vaultix doesn't support activation scripts, so you can't use it without `userborn` or `systemd.sysusers`).
 
     Advantages:
 
