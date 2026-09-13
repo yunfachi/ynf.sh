@@ -13,6 +13,10 @@ body {
     background: var(--fg);
 }
 
+.line_number {
+    color: light-dark(#93a1a1, #586e75);
+}
+
 /* codes: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/types.go */
 /* light: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/styles/solarized-light.xml */
 /* dark: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/styles/solarized-dark.xml */

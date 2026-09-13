@@ -90,17 +90,42 @@
 
   highlightCode =
     lang: content:
-    lib.removeSuffix "\n" (
-      builtins.readFile (
-        pkgs.runCommand "highlight-${lang}" { } ''
-          ${lib.getExe pkgs.chroma} \
-            --lexer ${lib.escapeShellArg lang} \
-            --html \
-            --html-only \
-            --html-prevent-surrounding-pre \
-            < ${builtins.toFile "input.${lang}" content} \
-            > $out
-        ''
+    let
+      formatLines =
+        text:
+        let
+          padding = 2;
+
+          padLeft =
+            filler: content:
+            builtins.concatStringsSep "" (
+              builtins.genList (_: filler) (lib.max 0 (padding - lib.stringLength content))
+            )
+            + content;
+        in
+        lib.concatImapStringsSep "\n" (
+          line_number: line:
+          ''<span class="line_number">${
+            if lang == "sh" then
+              padLeft " " (if line_number == 1 then "$" else "")
+            else
+              padLeft "0" (toString line_number)
+          }</span>${line}''
+        ) (lib.splitString "\n" text);
+    in
+    formatLines (
+      lib.removeSuffix "\n" (
+        builtins.readFile (
+          pkgs.runCommand "highlight-${lang}" { } ''
+            ${lib.getExe pkgs.chroma} \
+              --lexer ${lib.escapeShellArg lang} \
+              --html \
+              --html-only \
+              --html-prevent-surrounding-pre \
+              < ${builtins.toFile "input.${lang}" content} \
+              > $out
+          ''
+        )
       )
     );
 }

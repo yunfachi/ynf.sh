@@ -21,6 +21,7 @@ body {
 
     --body-padding: clamp(12px, 1.3vw, 40px);
     padding: var(--body-padding);
+    padding-left: calc(var(--body-padding) + 2ch);
 
     font-family: monospace;
     font-size: 16px;
@@ -91,6 +92,12 @@ a:hover {
 
 .nav {
     white-space: nowrap;
+}
+
+.line_number {
+    user-select: none;
+    position: absolute;
+    margin-left: -3ch;
 }
 
 pre {
