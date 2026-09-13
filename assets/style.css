@@ -55,9 +55,8 @@ a:hover {
     right: 10px;
     bottom: 0;
 
-    width: min(100vw, 100vh);
     aspect-ratio: 700/500;
-
+    width: min(100vw, 100vh * 7 / 5);
     max-width: 700px;
 
     display: block;
@@ -74,7 +73,7 @@ a:hover {
     mask: url("/assets/banner.png") center / contain no-repeat;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .logo {
         position: static;
 
@@ -99,7 +98,7 @@ a:hover {
 
 pre {
     white-space: break-spaces;
-    overflow-x: auto;
+    overflow: auto hidden;
 }
 
 @media (max-width: 400px) {
