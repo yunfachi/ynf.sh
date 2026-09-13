@@ -1,0 +1,45 @@
+:root {
+    color-scheme: light dark;
+    --fg: light-dark(#000000, #b2b2b2);
+    --bg: light-dark(#f2f0eb, #222222);
+}
+
+body {
+    color: var(--fg);
+    background-color: var(--bg);
+}
+
+.logo {
+    background: var(--fg);
+}
+
+/* codes: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/types.go */
+/* light: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/styles/solarized-light.xml */
+/* dark: https://github.com/alecthomas/chroma/blob/4b5527126b59a79eaf8ed1d488436bf07abc14aa/styles/solarized-dark.xml */
+
+.chroma {
+    /* operators and keywords */
+    .k, .kp, .kd, .kn, .kr, .kt,
+    .o, .ow, .or {
+        color: light-dark(#859900, #719e07);
+    }
+
+    /* variables and names */
+    .n, .na, .nc, .nd, .nl, .nn, .nx, .py, .nt, .nb, .bp,
+    .nv, .vc, .vg, .vi, .vm, .nf, .fm {
+        color: light-dark(#268bd2, #268bd2);
+    }
+
+    /* literals (numbers, strings, constants) */
+    .m, .mb, .mf, .mh, .mi, .il, .mo,
+    .l, .ld,
+    .no, .ni, .ne,
+    .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss {
+        color: light-dark(#2aa198, #2aa198);
+    }
+
+    /* comments */
+    .c, .cm, .c1 {
+        color: light-dark(#93a1a1, #586e75);
+    }
+}
