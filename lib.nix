@@ -95,10 +95,8 @@
         pkgs.runCommand "highlight-${lang}" { } ''
           ${lib.getExe pkgs.chroma} \
             --lexer ${lib.escapeShellArg lang} \
-            --style=solarized-dark \
             --html \
             --html-only \
-            --html-inline-styles \
             --html-prevent-surrounding-pre \
             < ${builtins.toFile "input.${lang}" content} \
             > $out
