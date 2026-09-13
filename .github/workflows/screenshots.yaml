@@ -29,52 +29,58 @@ jobs:
 
       - name: Create screenshots
         run: |
-          mkdir -p .github/assets/screenshots
+          mkdir -p .github/assets/screenshots/light
+          mkdir -p .github/assets/screenshots/dark
 
           node <<'EOF'
           const { chromium } = require('playwright');
 
           const screenshots = [
             {
+              name: 'index',
               url: 'https://ynf.sh/',
-              file: '.github/assets/screenshots/index.png',
             },
             {
+              name: 'projects',
               url: 'https://ynf.sh/projects',
-              file: '.github/assets/screenshots/projects.png',
             },
             {
+              name: 'posts',
               url: 'https://ynf.sh/posts',
-              file: '.github/assets/screenshots/posts.png',
             },
             {
+              name: 'post',
               url: 'https://ynf.sh/posts/nix-secrets-a-postmodern-secrets-manager-for-nixos',
-              file: '.github/assets/screenshots/post.png',
             },
           ];
 
           (async () => {
             const browser = await chromium.launch();
 
-            const page = await browser.newPage({
-              viewport: {
-                width: 1440,
-                height: 900,
-              },
-              deviceScaleFactor: 1,
-            });
-
-            for (const screenshot of screenshots) {
-              console.log(`Screenshotting ${screenshot.url}`);
-
-              await page.goto(screenshot.url, {
-                waitUntil: 'networkidle',
+            for (const theme of ['light', 'dark']) {
+              const page = await browser.newPage({
+                viewport: {
+                  width: 1440,
+                  height: 900,
+                },
+                deviceScaleFactor: 1,
+                colorScheme: theme,
               });
 
-              await page.screenshot({
-                path: screenshot.file,
-                fullPage: false,
-              });
+              for (const screenshot of screenshots) {
+                console.log(`Screenshotting ${screenshot.url} (${theme})`);
+
+                await page.goto(screenshot.url, {
+                  waitUntil: 'networkidle',
+                });
+
+                await page.screenshot({
+                  path: `.github/assets/screenshots/${theme}/${screenshot.name}.png`,
+                  fullPage: false,
+                });
+              }
+
+              await page.close();
             }
 
             await browser.close();
@@ -86,7 +92,6 @@ jobs:
         with:
           name: screenshots
           path: .github/assets/screenshots/
-
 
   commit:
     needs: screenshots
@@ -110,10 +115,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add .github/assets/screenshots/index.png
-          git add .github/assets/screenshots/projects.png
-          git add .github/assets/screenshots/posts.png
-          git add .github/assets/screenshots/post.png
+          git add .github/assets/screenshots/light
+          git add .github/assets/screenshots/dark
 
           git diff --cached --quiet && exit 0
 
