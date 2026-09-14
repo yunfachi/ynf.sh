@@ -1,7 +1,18 @@
 @import "theme.css";
 
+@font-face {
+    font-family: "Terminus Bold";
+    src: url("/assets/font.ttf");
+}
+
+@font-face {
+    font-family: "Terminus Bold Italic";
+    src: url("/assets/font-italic.ttf");
+}
+
 * {
     box-sizing: border-box;
+    font-family: "Terminus Bold", monospace;
 }
 
 html,
@@ -23,7 +34,6 @@ body {
     padding: var(--body-padding);
     padding-left: calc(var(--body-padding) + 2ch);
 
-    font-family: monospace;
     font-size: 16px;
     line-height: 1.25rem;
 }

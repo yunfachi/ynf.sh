@@ -42,7 +42,11 @@ let
   );
 
   structure = {
-    "assets" = ./assets;
+    "assets/banner.png" = ./assets/banner.png;
+    "assets/style.css" = ./assets/style.css;
+    "assets/theme.css" = ./assets/theme.css;
+    "assets/font.ttf" = pkgs.terminus_font_ttf + "/share/fonts/truetype/TerminusTTF-Bold.ttf";
+    "assets/font-italic.ttf" = pkgs.terminus_font_ttf + "/share/fonts/truetype/TerminusTTF-Bold-Italic.ttf";
     "sitemap.txt" = lib.concatMapStringsSep "\n" (
       path: lib.removeSuffix "index" "https://ynf.sh/${path}"
     ) (builtins.attrNames pages);

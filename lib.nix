@@ -70,7 +70,7 @@ rec {
     pkgs.linkFarm "site" (
       builtins.mapAttrs (
         name: value:
-        if builtins.isPath value then
+        if lib.isStringLike value && lib.hasPrefix (builtins.storeDir + "/") (toString value) then
           value
         else
           pkgs.writeTextFile {
