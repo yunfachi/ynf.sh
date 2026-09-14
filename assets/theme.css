@@ -49,5 +49,6 @@ body {
     /* comments */
     .c, .cm, .c1 {
         color: light-dark(#93a1a1, #586e75);
+        font-family: "Terminus Bold Italic", monospace;
     }
 }
