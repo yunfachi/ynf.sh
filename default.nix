@@ -43,6 +43,7 @@ let
 
   structure = {
     "assets/banner.png" = ./assets/banner.png;
+    "assets/favicon.svg" = ./assets/favicon.svg;
     "assets/style.css" = ./assets/style.css;
     "assets/theme.css" = ./assets/theme.css;
     "assets/font.ttf" = pkgs.terminus_font_ttf + "/share/fonts/truetype/TerminusTTF-Bold.ttf";
