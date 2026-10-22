@@ -7,13 +7,14 @@
     ];
     description = "A postmodern secrets manager for NixOS";
     source = "https://github.com/unnamed-systems/nix-secrets";
-    # docs = "https://nix-secrets.unnamed.systems/";
+    docs = "https://nix-secrets.unnamed.systems/";
   }
   {
     name = "nixsecauditor";
     languages = [ "Nix" ];
     description = "Extensible rule-based static security auditor for NixOS configurations with multiple reporting outputs";
     source = "https://github.com/unnamed-systems/nixsecauditor";
+    docs = "https://nixsecauditor.unnamed.systems/";
   }
   {
     name = "denix";
