@@ -5,7 +5,7 @@
   flake,
   ...
 }@args:
-rec {
+{
   call = file: lib.toFunction (import file) args;
 
   callDir =
@@ -90,9 +90,9 @@ rec {
 
   link = id: content: ''<span class="link-gutter"><a href="#${id}" id="${id}">${content}</a> </span>'';
 
-  question = id: link "q-${id}" "?";
-  answer = id: link "a-${id}" ">";
-  heading = id: link id "#";
+  question = id: slib.link "q-${id}" "?";
+  answer = id: slib.link "a-${id}" ">";
+  heading = id: slib.link id "#";
 
   highlightCode =
     lang: content:
