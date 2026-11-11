@@ -5,7 +5,7 @@
   content = ''
     First of all, this post is aimed at flakes that provide external outputs, like `nixosModules` or `packages` - your private NixOS configuration DOES NOT need this.
 
-    For example, you have a project called `niri-nix`, which introduces Niri's NixOS module and Niri package. But besides nixpkgs, that flake's inputs also include `flake-parts`, `treefmt-nix`, `git-hooks.nix`, and so on. Nix flake inputs are NOT lazily fetched. This means that if you only use, for example, `nixosModules.default` from that flake, and `nixosModules.default` does not mention `treefmt-nix` or any of the other inputs at all, they will still be added to the user's flake lock as dependencies of your flake, and they will still be downloaded.
+    For example, you have a project called `niri-nix`, which introduces Niri's NixOS module and Niri package. But besides nixpkgs, that flake's inputs also include `flake-parts`, `treefmt-nix`, `git-hooks.nix`, and so on. Nix flake inputs are fetched lazily, but they are locked eagerly. This means that if you only use, for example, `nixosModules.default` from that flake, and `nixosModules.default` does not mention `treefmt-nix` or any of the other inputs at all, they will still be added to the user's flake lock as dependencies of your flake.
 
     ${slib.question "but-how"}But how can you prevent some inputs from being redundantly and meaninglessly fetched?
     ${slib.answer "but-how"}Implement a separate flake for those inputs - I call it a `dev` flake. The idea is to keep development-only inputs outside of the flake that is consumed by users.
